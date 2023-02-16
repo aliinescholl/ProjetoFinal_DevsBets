@@ -1,0 +1,29 @@
+unit UEntity.Matches;
+
+interface
+
+uses
+  System.JSON,
+  GBSwagger.Model.Attributes, UEntity.Teams;
+
+type
+  Tmatch = class
+  private
+    FId : Integer;
+    FDate: TDate;
+    FHour: TTime;
+    FTeamA: TTeam;
+    FTeamB: TTeam;
+    FResultTeamA: Byte;
+    FResultTeamB: Byte;
+    FStatusByte: Byte;
+
+
+  public
+
+    property FId: Integer read GetFId write SetFId;
+  end;
+
+implementation
+
+end.

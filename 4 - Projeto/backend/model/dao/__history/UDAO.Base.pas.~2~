@@ -1,0 +1,101 @@
+unit UDAO.Base;
+
+interface
+
+uses
+  UDAO.Intf,
+  System.JSON,
+  Dataset.Serialize;
+
+type
+  TDAOBase = class(TInterfacedObject, IDAO)
+  protected
+    FTabela: String;
+  public
+    function ObterRegistros : TJSONArray;
+    function ProcurarPorId(aIdentificador: Integer): TJSONObject;
+    function AdicionarRegistro(aRegistro: TJSONObject): Boolean;
+    function DeletarRegistro(aIdentificador: Integer): Boolean;
+
+    property Tabela: String read GetTabela write SetTabela;
+
+    //function ValidarLogin(aUser, aPassword: String): Boolean;
+  end;
+
+implementation
+
+uses
+  FIREDAC.Comp.Client,
+  System.SysUtils,
+  UUtil.Banco;
+
+
+{ TDAOUsers }
+
+function TDAOBase.AdicionarRegistro(aRegistro: TJSONObject): Boolean;
+  begin
+  try
+    result := TUtilBanco.AdicionarRegistro(TABELA, aRegistro.ToJSON)
+  except on E: Exception do
+    raise Exception.Create('Erro ao adicionar registro' + e.Message);
+  end;
+end;
+
+function TDAOBase.DeletarRegistro(aIdentificador: Integer): Boolean;
+begin
+  try
+    result := TUtilBanco.RemoverRegistro(TABELA, aIdentificador);
+  except on E: Exception do
+    raise Exception.Create('Erro ao remover registro' + e.Message);
+  end;
+end;
+
+function TDAOBase.ObterRegistros: TJSONArray;
+begin
+ try
+   result := TUtilBanco.ExecutarConsulta(Format('SELECT * FROM %s', [TABELA]))
+ except on E: Exception do
+   raise Exception.Create('Erro ao obter os registros' + e.Message);
+ end;
+end;
+
+function TDAOBase.ProcurarPorId(aIdentificador: Integer): TJSONObject;
+var
+  xJSONArray : TJSONArray;
+begin
+  try
+    xJSONArray := TUtilBanco.ExecutarConsulta(
+                    Format('SELECT * FROM %s WHERE ID = %d',
+                      [TABELA, aIdentificador]));
+
+    if xJsonArray.Count = 0 then
+    begin
+      result := TJSONObject.Create;
+      xJSONArray.Free;
+      Exit;
+    end;
+
+    result := TJSONObject.ParseJSONValue(TEncoding.ASCII.GetBytes(
+    xJSONArray[0].ToJson), 0) as TJSONObject;
+
+  except on E: Exception do
+    raise Exception.Create('Erro ao obter registros ' + e.Message);
+  end;
+end;
+
+//function TDAOUsers.ValidarLogin(aUser, aPassword: String): Boolean;
+//var
+//  xJSONArray : TJSONArray;
+//begin
+//  try
+//    xJSONArray := TUtilBanco.ExecutarConsulta(
+//      Format('SELECT * FROM %s WHERE LOGIN = %s AND PASSWORD = %s',
+//        [TABELA, QuotedStr(aUser), QuotedStr(aPassWord)]));
+//
+//    result := Assigned(xJsonArray) and (xJSONArray.Count > 0)
+//  except on E: Exception do
+//    raise Exception.Create('Erroao validar Usuário:' + e.Message);
+//  end;
+//end;
+
+end.

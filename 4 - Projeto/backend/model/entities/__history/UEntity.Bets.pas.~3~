@@ -1,0 +1,25 @@
+unit UEntity.Bets;
+
+interface
+
+uses
+  UEntity.Users,
+  UEntity.Matchs,
+  GBSwagger.Model.Attributes;
+
+type
+  TBet = class
+    private
+     FId : Integer;
+     FUser :  TUser;
+     FMatch : TMatch;
+     FresultTeamA : Byte;
+     FResultTeamB : Byte;
+     FStatus : Byte;
+
+    public
+  end;
+
+implementation
+
+end.

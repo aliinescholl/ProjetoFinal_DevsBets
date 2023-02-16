@@ -1,0 +1,76 @@
+unit UEntity.Teams;
+
+interface
+
+uses
+  System.JSON,
+  GBSwagger.Model.Attributes;
+
+type
+  TTeam = class
+    private
+    Fid: Integer;
+    FName: String;
+    FJSON: TJSONObject;
+    function GetId: Integer;
+    function GetJSON: TJSONObject;
+    function GetName: String;
+    procedure SetId(const Value: Integer);
+    procedure SetName(const Value: String);
+    public
+    constructor Create(const aName: String; const aId: Integer = 0);
+    destructor Destroy; override;
+
+    [SwagProp('Time Id',True)]
+    property Id: Integer read GetId write SetId;
+
+    [SwagProp('Time Nome', True)]
+    property Name: String read GetName write SetName;
+
+    property JSON: TJSONObject read GetJSON;
+  end;
+
+implementation
+
+{ TTeam }
+
+constructor TTeam.Create(const aName: String; const aId: Integer);
+begin
+  FJSON := TJSONObject.Create;
+
+  FId     := aId;
+  FName   := aNome;
+end;
+
+destructor TTeam.Destroy;
+begin
+
+  inherited;
+end;
+
+function TTeam.GetId: Integer;
+begin
+
+end;
+
+function TTeam.GetJSON: TJSONObject;
+begin
+
+end;
+
+function TTeam.GetName: String;
+begin
+
+end;
+
+procedure TTeam.SetId(const Value: Integer);
+begin
+
+end;
+
+procedure TTeam.SetName(const Value: String);
+begin
+
+end;
+
+end.

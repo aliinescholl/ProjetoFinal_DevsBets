@@ -1,0 +1,12 @@
+unit UEntity.Bets;
+
+uses
+  UEntity.Users,
+  UEntity.Matchs,
+  GBSwagger.Model.Attributes;
+
+interface
+
+implementation
+
+end.

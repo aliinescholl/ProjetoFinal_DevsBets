@@ -1,0 +1,16 @@
+unit UEntity.Teams;
+
+interface
+
+uses
+  System.JSON,
+  GBSwagger.Model.Attributes;
+
+type
+  TTeam = class
+
+  end;
+
+implementation
+
+end.
