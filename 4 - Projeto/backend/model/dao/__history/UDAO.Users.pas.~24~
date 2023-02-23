@@ -1,0 +1,48 @@
+unit UDAO.Users;
+
+interface
+
+uses
+  UDAO.Base,
+  UDAO.Intf,
+  System.JSON,
+  Dataset.Serialize;
+
+type
+  TDAOUsers = class(TDAObase)
+    protected
+    FTabela: String;
+    public
+    function ValidarLogin(aUser, aPassword: String): Boolean;
+    constructor Create;
+  end;
+
+implementation
+
+uses
+  UUtil.Banco, System.SysUtils;
+
+{ TDAO }
+
+constructor TDAOUser.Create;
+begin
+  FTabela := 'users';
+end;
+
+function TDAOUser.ValidarLogin(aUser, aPassword: String): Boolean;
+var
+  xJSONArray : TJSONArray;
+begin
+  try
+    xJSONArray := TUtilBanco.ExecutarConsulta(
+      Format('SELECT * FROM %s WHERE LOGIN = %s AND PASSWORD = %s',
+        [FTABELA, QuotedStr(aUser), QuotedStr(aPassWord)]));
+
+    result := Assigned(xJsonArray) and (xJSONArray.Count > 0)
+  except on E: Exception do
+    raise Exception.Create('Erroao validar Usuário:' + e.Message);
+  end;
+end;
+
+
+end.

@@ -1,4 +1,4 @@
-ï»¿unit UUtil.Banco;
+unit UUtil.Banco;
 
 interface
 
@@ -37,10 +37,10 @@ begin
   xDriver := TFDPhysMySQLDriverLink.Create(nil);
   FConexao  := TFDConnection.Create(nil);
 
-  //Driver de ConexÃ£o do MySQL
+  //Driver de Conexão do MySQL
   xDriver.VendorLib := ExtractFilePath(ParamStr(0)) + 'libmysql.dll';
 
-  //Parï¿½metros de ConfiguraÃ§Ã£o do banco
+  //Parâmetros de Configuração do banco
   FConexao.DriverName  := 'MySQL';
   FConexao.LoginPrompt := False;
   FConexao.Params.Add('Database=devsbets');
@@ -109,6 +109,9 @@ begin
     Self.AbrirConexao;
     xQuery.Connection := FConexao;
     xQuery.Open(aSQL);
+
+    TDataSetSerializeConfig.GetInstance.Export.FormatDate := 'dd/mm/yyyy';
+    TDataSetSerializeConfig.GetInstance.Export.FormatTime := 'HH:mm:ss';
 
     Result := xQuery.ToJSONArray();
     Self.FecharConexao;

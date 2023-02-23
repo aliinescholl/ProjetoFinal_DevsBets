@@ -7,10 +7,10 @@ uses
 
 type
   IDAO = Interface
-    function ObterRegistros : TJSONArray;
-    function ProcurarPorId(aIdentificador: Integer): TJSONObject;
+    function ObterRegistros: TJSONArray;
+    function ProcurarPorId(const aIdentificador: Integer): TJSONObject;
     function AdicionarRegistro(aRegistro: TJSONObject): Boolean;
-    function DeletarRegistro(aIdentificador: Integer): Boolean;
+    function DeletarRegistro(const aIdentificador: Integer): Boolean;
   End;
 
 implementation

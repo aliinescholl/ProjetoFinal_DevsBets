@@ -1,0 +1,110 @@
+program DevsBets_BackEnd;
+
+{$APPTYPE CONSOLE}
+
+uses
+  Horse,
+  Horse.Jhonson,
+  Horse.CORS,
+  Horse.JWT,
+  Horse.BasicAuthentication,
+  Horse.GBSwagger,
+  System.SysUtils,
+  UEntity.Users in 'backend\model\entities\UEntity.Users.pas',
+  UEntity.Logins in 'backend\model\entities\UEntity.Logins.pas',
+  UEntity.Teams in 'backend\model\entities\UEntity.Teams.pas',
+  UEntity.Matchs in 'backend\model\entities\UEntity.Matchs.pas',
+  UEntity.Bets in 'backend\model\entities\UEntity.Bets.pas',
+  UDAO.Intf in 'backend\model\dao\UDAO.Intf.pas',
+  UDAO.Base in 'backend\model\dao\UDAO.Base.pas',
+  UUtil.Banco in 'backend\model\utils\UUtil.Banco.pas',
+  UDAO.Users in 'backend\model\dao\UDAO.Users.pas',
+  UDAO.Teams in 'backend\model\dao\UDAO.Teams.pas',
+  UDAO.Matchs in 'backend\model\dao\UDAO.Matchs.pas',
+  UDAO.Bets in 'backend\model\dao\UDAO.Bets.pas',
+  UController.Base in 'backend\model\controllers\UController.Base.pas',
+  UController.User in 'backend\model\controllers\UController.User.pas',
+  UController.Bet in 'backend\model\controllers\UController.Bet.pas',
+  UController.Team in 'backend\model\controllers\UController.Team.pas',
+  UController.Matchs in 'backend\model\controllers\UController.Matchs.pas',
+  UController.Login in 'backend\model\controllers\UController.Login.pas';
+
+
+procedure Registry;
+begin
+//login
+  THorse.Group.Prefix('v1')
+    .Post('/login', TControllerLogin.PostLogin);
+
+  //users
+  Thorse.Group.Prefix('v1')
+    .Get('/users/', TControllerUser.Gets)
+    .Get('/users/:id', TControllerUser.Get)
+    .Post('/users/', TControllerUser.Post)
+    .Delete('/users/:id', TControllerUser.Delete);
+
+   //teams
+   Thorse.Group.Prefix('v1')
+    .Get('/teams/', TControllerTeams.Gets)
+    .Get('/teams/:id', TControllerTeams.Get)
+    .Post('/teams/', TControllerTeams.Post)
+    .Delete('/teams/:id', TControllerTeams.Delete);
+
+   //matchs
+   Thorse.Group.Prefix('v1')
+    .Get('/matchs/', TControllerMatch.Gets)
+    .Get('/matchs/:id', TControllerMatch.Get)
+    .Post('/matchs/', TControllerMatch.Post)
+    .Delete('/matchs/:id', TControllerMatch.Delete);
+
+   //bets
+   Thorse.Group.Prefix('v1')
+    .Get('/bets/', TControllerBets.Gets)
+    .Get('/bets/:id', TControllerBets.Get)
+    .Post('/bets/', TControllerBets.Post)
+    .Delete('/bets/:id', TControllerBets.Delete);
+end;
+
+procedure SwaggerConfig;
+begin
+  With THorseGBSwaggerRegister do
+  begin
+    RegisterPath(TControllerUser);
+    RegisterPath(TControllerTeams);
+    RegisterPath(TControllerMatch);
+    RegisterPath(TControllerBets);
+    RegisterPath(TControllerLogin);
+  end;
+
+  Swagger
+    .Info
+      .Title('Documentação API DevsBets')
+      .Description('DevsBets - Lance seu Palpite')
+      .Contact
+        .Name('Aline')
+        .Email('email@hotmail.com')
+        .URL('mypage.com')
+      .&End
+    .&End
+    .basePath('v1');
+
+end;
+
+procedure COnfig MIddleware;
+begin
+  Thorse
+end;
+
+begin
+  THorse.Get('/ping',
+    procedure(Req: THorseRequest; Res: THorseResponse; Next: TProc)
+    begin
+      Res.Send('pong');
+    end);
+
+  THorse.Listen(9000,
+    procedure(Horse: THorse)
+    begin
+      Writeln('Server is runing on port ' + IntToStr(Horse.Port));
+    end);
+end.

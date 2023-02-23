@@ -6,24 +6,40 @@ uses
   UDAO.Base;
 
 type
-  TDAO = class(TDAObase)
+  TDAOUsers = class(TDaoBase)
     public
-    function ValidarLogin(aUser, aPassword: String): Boolean;
-    constructor Create;
+      function ValidarLogin(const aUser, aPassword: String): Integer;
+      constructor Create;
   end;
 
 implementation
 
-{ TDAO }
+uses
+  System.JSON, UUtil.Banco, System.SysUtils;
 
-constructor TDAO.Create;
+{ TDAOUsers }
+
+constructor TDAOUsers.Create;
 begin
-  FTabela := 'users'
+  FTabela := 'users';
 end;
 
-function TDAO.ValidarLogin(aUser, aPassword: String): Boolean;
+function TDAOUsers.ValidarLogin(const aUser, aPassword: String): Integer;
+var
+  xJSONArray: TJSONArray;
 begin
+  Result := 0;
+  try
+    xJSONArray := TUtilBanco.ExecutarConsulta(
+      Format('SELECT * FROM %s WHERE LOGIN = %s AND PASSWORD = %s',
+        [FTabela, QuotedStr(aUser), QuotedStr(aPassword)]));
 
+    if Assigned(xJSONArray) and (xJSONArray.Count > 0) then
+      Result := StrToIntDef(xJSONArray[0].FindValue('id').Value,0);
+  except
+    on e: Exception do
+      raise Exception.Create('Erro ao Validar Usuário: ' + e.Message);
+  end;
 end;
 
 end.

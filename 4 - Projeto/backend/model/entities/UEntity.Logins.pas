@@ -3,34 +3,33 @@ unit UEntity.Logins;
 interface
 
 uses
-  System.JSON,
   GBSwagger.Model.Attributes;
 
 type
   TLogin = class
     private
-    FLogin: String;
-    FPassword: String;
-    FToken: String;
+      FLogin: String;
+      FPassword: String;
+      FToken: String;
 
-    function GetLogin: String;
-    function GetPassword: String;
-    function GetToken: String;
+      function GetLogin: String;
+      function GetPassword: String;
+      function GetToken: String;
 
-    procedure SetLogin(const Value: String);
-    procedure SetPassword(const Value: String);
-    procedure SetToken(const Value: String);
+      procedure SetLogin(const Value: String);
+      procedure SetPassword(const Value: String);
+      procedure SetToken(const Value: String);
     public
-    constructor Create(const aLogin, aPassword:String);
+      constructor Create(const aLogin, aPassword: String);
 
-    [SwagProp('Autentcação Login', True)]
-    property Login: String read GetLogin write SetLogin;
+      [SwagProp('Autenticação Login', True)]
+      property Login: String read GetLogin write SetLogin;
 
-    [SwagProp('Autenticação Senha', True)]
-    property Password: String read GetPassword write SetPassword;
+      [SwagProp('Autenticação Password', True)]
+      property Password: String read GetPassword write SetPassword;
 
-    [SwagProp('Autenticação Token', True)]
-    property Token: String read GetToken write SetToken;
+      [SwagProp('Autenticação Token', True)]
+      property Token: String read GetToken write SetToken;
   end;
 
 implementation
@@ -50,12 +49,12 @@ end;
 
 function TLogin.GetPassword: String;
 begin
-  result := FPassword;
+  Result := FPassword;
 end;
 
 function TLogin.GetToken: String;
 begin
-  result := FToken;
+  Result := FToken;
 end;
 
 procedure TLogin.SetLogin(const Value: String);

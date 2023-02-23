@@ -1,0 +1,75 @@
+unit UController.Teams;
+
+interface
+
+uses
+  Horse,
+  GBSwagger.Path.Attributes,
+  UController.Base,
+  UEntity.Users;
+
+type
+  [SwagPath('temas', 'Times')]
+  TControllerTeams = class(TControllerBase)
+    public
+    private
+    public
+    [SwagGET('Listar ApoTimestas', True)]
+    [SwagResponse(200, TUser, 'Informações dos Times', True)]
+    [SwagResponse(404)]
+    class procedure Gets(Req: THorseRequest; Res: THorseResponse; Next: TProc); override;
+
+    [SwagGET('{id}', 'Procurar um Times', True)]
+    [SwagParamPath('id', 'id do Times')]
+    [SwagResponse(200, TUser, 'Informações do Times', True)]
+    [SwagResponse(404)]
+    class procedure Get(Req: THorseRequest; Res: THorseResponse; Next: TProc); override;
+
+    [SwagPOST('Adicionar novo Time')]
+    [SwagParamBody('Informações do Time', TUser)]
+    [SwagResponse(201)]
+    [SwagResponse(400)]
+    class procedure Post(Req: THorseRequest; Res: THorseResponse; Next: TProc); override;
+
+    [SwagPOST('id','Deletar um Time')]
+    [SwagParamPath('id', 'Id do Time')]
+    [SwagResponse(204)]
+    [SwagResponse(400)]
+    [SwagResponse(404)]
+    class procedure Delete(Req: THorseRequest; Res: THorseResponse; Next: TProc); override;
+  end;
+
+
+implementation
+
+{ TControllerTeams }
+
+class procedure TControllerTeams.Delete(Req: THorseRequest; Res: THorseResponse;
+  Next: TProc);
+begin
+  FDAO := TDAOTeams.Create;
+  inherited;
+end;
+
+class procedure TControllerTeams.Get(Req: THorseRequest; Res: THorseResponse;
+  Next: TProc);
+begin
+  FDAO := TDAOTeams.Create;
+  inherited;
+end;
+
+class procedure TControllerTeams.Gets(Req: THorseRequest; Res: THorseResponse;
+  Next: TProc);
+begin
+  FDAO := TDAOTeams.Create;
+  inherited;
+end;
+
+class procedure TControllerTeams.Post(Req: THorseRequest; Res: THorseResponse;
+  Next: TProc);
+begin
+  FDAO := TDAOTeams.Create;
+  inherited;
+end;
+
+end.

@@ -1,0 +1,45 @@
+unit UController;
+
+interface
+
+uses
+  Horse,
+  GBSwagger.Path.Attributes,
+  UController.Base,
+  UEntity.Users;
+
+type
+  [SwagPath('users', 'Usuários')]
+  TCOntrollerUser = class(TControllerBase)
+    private
+    public
+    class function ValidateUser(const aUsername, aPassWord: String): Boolean;
+
+    [SwagGET('Listar Usuários', True)]
+    [SwagResponse(200, TUser, 'Informações do Usuário', True)]
+    [SwagResponse(404)]
+    class procedure Gets(Req: THorseRequest; Res: THorseResponse; Next: TProc); override;
+
+    [SwagGET('{id}', 'Procurar um Usuário', True)]
+    [SwagParamPath('id', 'id do usuário')]
+    [SwagResponse(200, TUser, 'Informações do Usuário', True)]
+    [SwagResponse(404)]
+    class procedure Get(Req: THorseRequest; Res: THorseResponse; Next: TProc); override;
+
+    [SwagPOST('Adicionar novo usuário')]
+    [SwagParamBody('Informações do Usuário', TUser)]
+    [SwagResponse(201)]
+    [SwagResponse(400)]
+    class procedure Post(Req: THorseRequest; Res: THorseResponse; Next: TProc); override;
+
+    [SwagPOST('id','Deletar um usuário')]
+    [SwagParamPath('id', 'Id do Usuário')]
+    [SwagResponse(204)]
+    [SwagResponse(400)]
+    [SwagResponse(404)]
+    class procedure Delete(Req: THorseRequest; Res: THorseResponse; Next: TProc); override;
+  end;
+
+implementation
+
+end.

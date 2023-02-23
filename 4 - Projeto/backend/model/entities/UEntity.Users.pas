@@ -9,78 +9,108 @@ uses
 type
   TUser = class
     private
-    Fid: Integer;
-    FName: String;
-    FLogin: String;
-    FPassword: String;
-    FStatus: Byte;
-    FJSON: TJSONObject;
-    function GetId: Integer;
-    function GetJSON: TJSONObject;
-    function GetLogin: String;
-    function GetName: String;
-    function GetPassword: String;
-    function GetStatus: Byte;
+      FId: Integer;
+      FName: String;
+      FStatus: Byte;
+      FLogin: String;
+      FPassword: String;
+      FJSON: TJSONObject;
 
-    procedure SetId(const Value: Integer);
-    procedure SetLogin(const Value: String);
-    procedure SetName(const Value: String);
-    procedure SetPassword(const Value: String);
-    procedure SetStatus(const Value: Byte);
+      function GetId: Integer;
+      function GetLogin: String;
+      function GetName: String;
+      function GetPassword: String;
+      function GetStatus: Byte;
+      function GetJSON: TJSONObject;
 
+      procedure SetId(const Value: Integer);
+      procedure SetLogin(const Value: String);
+      procedure SetName(const Value: String);
+      procedure SetPassword(const Value: String);
+      procedure SetStatus(const Value: Byte);
     public
-    constructor Create(const aName, aLogin, aPassword:String);
-    Destructor Destroy;override;
+      constructor Create; overload;
+      constructor Create(const aId: Integer); overload;
+      constructor Create(const aNome, aLogin, aPassword: String); overload;
+      constructor Create(const aId: Integer; const aNome, aLogin, aPassword: String; const aStatus: Byte); overload;
 
-    [SwagProp('Usuário Id', True)]
-    property Id: Integer read GetId write SetId;
+      destructor  Destroy; override;
 
-    [SwagProp('Usuário Nome', True)]
-    property Name: String read GetName write SetName;
+      [SwagProp('Usuário Id', True)]
+      property Id: Integer read GetId write SetId;
 
-    [SwagProp('Usuário Login', True)]
-    property Login: String read GetLogin write SetLogin;
+      [SwagProp('Usuário Nome', True)]
+      property Name: String read GetName write SetName;
 
-    [SwagProp('Usuário Password', True)]
-    property Password: String read GetPassword write SetPassword;
+      [SwagProp('Usuário Status', True)]
+      property Status: Byte read GetStatus write SetStatus;
 
-    [SwagProp('Usuário Status', True)]
-    property Status: Byte read GetStatus write SetStatus;
+      [SwagProp('Usuário Login', True)]
+      property Login: String read GetLogin write SetLogin;
 
-    property JSON: TJSONObject read GetJSON;
+      [SwagProp('Usuário Senha', True)]
+      property Password: String read GetPassword write SetPassword;
 
-
+      property JSON: TJSONObject read GetJSON;
   end;
 
 implementation
 
+uses
+  SysUtils;
+
 { TUser }
 
-constructor TUser.Create(const aName, aLogin, aPassword: String);
+constructor TUser.Create;
 begin
   FJSON := TJSONObject.Create;
+end;
 
-  FName     := aName;
+constructor TUser.Create(const aId: Integer);
+begin
+  FId := aId;
+
+  Self.Create;
+end;
+
+constructor TUser.Create(const aNome, aLogin, aPassword: String);
+begin
+  FName     := aNome;
   FLogin    := aLogin;
   FPassword := aPassword;
+
+  Self.Create;
+end;
+
+constructor TUser.Create(const aId: Integer; const aNome, aLogin,
+  aPassword: String; const aStatus: Byte);
+begin
+  FId       := aId;
+  FName     := aNome;
+  FLogin    := aLogin;
+  FPassword := aPassword;
+  FStatus   := aStatus;
+
+  Self.Create;
 end;
 
 destructor TUser.Destroy;
 begin
-  if Assigned(FJSON) then
-    FJSON.Free;
+  FreeAndNil(FJSON);
+
   inherited;
 end;
 
 function TUser.GetId: Integer;
 begin
-   Result := FId;
+  Result := FId;
 end;
 
 function TUser.GetJSON: TJSONObject;
 begin
-  FJSON.AddPair('name', FName);
-  FJSON.AddPair('login', FLogin);
+  FJSON.AddPair('id',       FId.ToString);
+  FJSON.AddPair('name',     FName);
+  FJSON.AddPair('login',    FLogin);
   FJSON.AddPair('password', FPassword);
 
   Result := FJSON;
@@ -98,12 +128,12 @@ end;
 
 function TUser.GetPassword: String;
 begin
-  Result := FPassword
+  Result := FPassword;
 end;
 
 function TUser.GetStatus: Byte;
 begin
-  Result := FStatus
+  Result := FStatus;
 end;
 
 procedure TUser.SetId(const Value: Integer);

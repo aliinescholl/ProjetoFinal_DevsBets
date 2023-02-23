@@ -1,0 +1,14 @@
+program DevsBets_FrontEnd;
+
+uses
+  System.StartUpCopy,
+  FMX.Forms,
+  DesvsBets_FrontEnd in 'projeto\DesvsBets_FrontEnd.pas' {Form1};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.CreateForm(TForm1, Form1);
+  Application.Run;
+end.

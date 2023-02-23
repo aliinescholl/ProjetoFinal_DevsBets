@@ -1,0 +1,23 @@
+unit UDAO.Bets;
+
+interface
+
+uses
+  UDAO.Base;
+
+type
+  TDAOBets = class (TDAOBase)
+    public
+    constructor Create;
+  end;
+
+implementation
+
+{ TDAOBets }
+
+constructor TDAOBets.Create;
+begin
+  FTabela := 'betse'
+end;
+
+end.
