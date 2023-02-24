@@ -23,13 +23,13 @@ type
     edtNome: TEdit;
     edtLogin: TEdit;
     edtSenha: TEdit;
-//    procedure rectRegistrarClick(Sender: TObject);
+    procedure rectRegistrarClick(Sender: TObject);
     procedure lblVoltarClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
     procedure VoltarTela;
-//    procedure Registrar;
+    procedure Registrar;
   public
     { Public declarations }
   end;
@@ -41,8 +41,8 @@ implementation
 
 uses
   UFrmLogin,
-//  Uservice.Users;
-  UEntity.Users;
+  Uservice.User,
+  UEntity.Users, UService.intf;
 
 {$R *.fmx}
 
@@ -59,9 +59,10 @@ procedure TFrmLoginRegistry.lblVoltarClick(Sender: TObject);
 begin
   Self.VoltarTela;
 end;
-{
+
 procedure TFrmLoginRegistry.rectRegistrarClick(Sender: TObject);
 begin
+
   Self.Registrar;
 end;
 
@@ -91,7 +92,8 @@ begin
     on e: exception do
       raise Exception.Create('Erro: ' + E.Message);
   end;
-end;  }
+  showmessage('Usuário cadastrado com sucesso!');
+end;
 
 procedure TFrmLoginRegistry.VoltarTela;
 begin

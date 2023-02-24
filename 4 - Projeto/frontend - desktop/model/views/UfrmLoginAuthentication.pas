@@ -28,8 +28,8 @@ type
     procedure lblVoltarClick(Sender: TObject);
   private
     procedure VoltarTela;
-//    procedure AbrirHome;
-//    procedure Logar;
+    procedure AbrirHome;
+    procedure Logar;
     { Private declarations }
   public
     { Public declarations }
@@ -44,16 +44,18 @@ uses
   UfrmLogin,
 //  UfrmHome,
   UEntity.Logins,
-//  UService.Intf,
-//  UService.Login,
+  UService.Intf,
+  UService.Login,
   UfrmLoginRegistry;
 {$R *.fmx}
 
 { TFrmLoginAuthentication }
-{
+
 procedure TFrmLoginAuthentication.AbrirHome;
 begin
-  if not Assigned(FrmHome) then
+  showmessage('login realizado');
+end;
+  {if not Assigned(FrmHome) then
     FrmHome := TFrmHome.Create(Application);
 
   FrmHome.Show;
@@ -71,7 +73,7 @@ procedure TFrmLoginAuthentication.lblVoltarClick(Sender: TObject);
 begin
   Self.VoltarTela;
 end;
-{
+
 procedure TFrmLoginAuthentication.Logar;
 var
   xServiceLogin: IService;
@@ -93,11 +95,11 @@ begin
     raise Exception.Create('Login' + E.Message);
   end;
 end;
-}
+
 
 procedure TFrmLoginAuthentication.rectRegistrarClick(Sender: TObject);
 begin
-//  self.Logar;
+  self.Logar;
 end;
 
 procedure TFrmLoginAuthentication.VoltarTela;

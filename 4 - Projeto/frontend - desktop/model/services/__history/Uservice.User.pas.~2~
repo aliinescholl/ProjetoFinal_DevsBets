@@ -1,0 +1,26 @@
+unit Uservice.User;
+
+interface
+
+uses
+  UEntity.Users, UService.Base;
+
+type
+  TServiceUser = class(TServiceBase)
+    private
+      FUser: TUser;
+    public
+      constructor Create; overload;
+      constructor Create(aUser: TUser); overload;
+      destructor Destroy; override;
+
+      procedure Registrar; override;
+      procedure Listar; override;
+      procedure Excluir; override;
+
+      function ObterRegistro(const aId:Integer):TObject; override;
+  end;
+
+implementation
+
+end.

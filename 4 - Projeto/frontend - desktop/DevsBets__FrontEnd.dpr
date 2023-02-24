@@ -11,7 +11,13 @@ uses
   UEntity.Logins in '..\backend\model\entities\UEntity.Logins.pas',
   UEntity.Matchs in '..\backend\model\entities\UEntity.Matchs.pas',
   UEntity.Teams in '..\backend\model\entities\UEntity.Teams.pas',
-  UEntity.Users in '..\backend\model\entities\UEntity.Users.pas';
+  UEntity.Users in '..\backend\model\entities\UEntity.Users.pas',
+  UService.Base in 'model\services\UService.Base.pas',
+  UService.intf in 'model\services\UService.intf.pas',
+  Uservice.User in 'model\services\Uservice.User.pas',
+  UUtils.Constants in 'model\utils\UUtils.Constants.pas',
+  UService.Login in 'model\services\UService.Login.pas',
+  UService.User.Authenticated in 'model\services\UService.User.Authenticated.pas';
 
 {$R *.res}
 
