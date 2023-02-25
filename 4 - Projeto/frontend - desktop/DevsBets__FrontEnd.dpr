@@ -4,7 +4,7 @@ uses
   System.StartUpCopy,
   FMX.Forms,
   DevsBets_FrontEnd,
-  UfrmLoginAuthentication in 'model\views\UfrmLoginAuthentication.pas' {FrmLoginAuthentication},
+  UfrmHome in 'model\views\UfrmHome.pas' {FrmHome},
   UfrmLoginRegistry in 'model\views\UfrmLoginRegistry.pas' {FrmLoginRegistry},
   UFrmLogin in 'model\views\UFrmLogin.pas' {FrmLogin},
   UEntity.Bets in '..\backend\model\entities\UEntity.Bets.pas',
@@ -17,12 +17,17 @@ uses
   Uservice.User in 'model\services\Uservice.User.pas',
   UUtils.Constants in 'model\utils\UUtils.Constants.pas',
   UService.Login in 'model\services\UService.Login.pas',
-  UService.User.Authenticated in 'model\services\UService.User.Authenticated.pas';
+  UService.User.Authenticated in 'model\services\UService.User.Authenticated.pas',
+  UfrmLoginAuthentication in 'model\views\UfrmLoginAuthentication.pas' {FrmLoginAuthentication},
+  UTils.Enums in 'model\utils\UTils.Enums.pas';
 
 {$R *.res}
 
 begin
+  ReportMemoryLeaksOnShutdown := True;
+
   Application.Initialize;
   Application.CreateForm(TFrmLogin, FrmLogin);
+  Application.CreateForm(TFrmLoginAuthentication, FrmLoginAuthentication);
   Application.Run;
 end.

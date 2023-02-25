@@ -1,0 +1,100 @@
+unit UfrmHome;
+
+interface
+
+uses
+  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
+  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Layouts,
+  FMX.Objects, FMX.Controls.Presentation, FMX.StdCtrls, FMX.Edit, FMX.ListBox,
+  FMX.MultiView;
+
+type
+  TFrmHome = class(TForm)
+    rectPrincipal: TRectangle;
+    lytContainer: TLayout;
+    Image1: TImage;
+    StyleBook1: TStyleBook;
+    MultiView1: TMultiView;
+    lstMenu: TListBox;
+    lytLogo: TLayout;
+    Image2: TImage;
+    Rectangle2: TRectangle;
+    btnHome: TSpeedButton;
+    procedure lstMenuItemClick(const Sender: TCustomListBox;
+      const Item: TListBoxItem);
+  private
+    procedure RemoverTelaAnterior;
+    procedure AbrirTeam;
+    procedure AbrirMatch;
+    procedure AbrirBet;
+    procedure Sair;
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FrmHome : TFrmHome;
+
+implementation
+
+uses
+  UfrmLogin,
+  UEntity.Logins,
+  UService.Intf,
+  UService.Login,
+  UfrmLoginRegistry,
+  UUtils.Enums;
+
+{$R *.fmx}
+
+{ TFrmHome }
+
+
+{ TFrmHome }
+
+procedure TFrmHome.AbrirBet;
+begin
+
+end;
+
+procedure TFrmHome.AbrirMatch;
+begin
+
+end;
+
+procedure TFrmHome.AbrirTeam;
+begin
+
+end;
+
+procedure TFrmHome.lstMenuItemClick(const Sender: TCustomListBox;
+  const Item: TListBoxItem);
+begin
+  Self.RemoverTelaAnterior;
+
+  case TEnumMenu(ITem.Index) of
+    mnuTime:
+      Self.AbrirTeam;
+    mnuPartidas:
+      Self.AbrirMatch;
+    mnuPalpites:
+      Self.AbrirBet;
+    mnuSair:
+      Self.Sair;
+
+  end;
+end;
+
+
+procedure TFrmHome.RemoverTelaAnterior;
+begin
+
+end;
+
+procedure TFrmHome.Sair;
+begin
+
+end;
+
+end.

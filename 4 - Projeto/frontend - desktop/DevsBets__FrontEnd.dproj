@@ -267,8 +267,8 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="model\views\UfrmLoginAuthentication.pas">
-            <Form>FrmLoginAuthentication</Form>
+        <DCCReference Include="model\views\UfrmHome.pas">
+            <Form>FrmHome</Form>
             <FormType>fmx</FormType>
         </DCCReference>
         <DCCReference Include="model\views\UfrmLoginRegistry.pas">
@@ -290,6 +290,11 @@
         <DCCReference Include="model\utils\UUtils.Constants.pas"/>
         <DCCReference Include="model\services\UService.Login.pas"/>
         <DCCReference Include="model\services\UService.User.Authenticated.pas"/>
+        <DCCReference Include="model\views\UfrmLoginAuthentication.pas">
+            <Form>FrmLoginAuthentication</Form>
+            <FormType>fmx</FormType>
+        </DCCReference>
+        <DCCReference Include="model\utils\UTils.Enums.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

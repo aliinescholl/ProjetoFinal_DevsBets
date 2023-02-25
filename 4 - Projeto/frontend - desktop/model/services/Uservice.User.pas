@@ -106,7 +106,6 @@ begin
       raise Exception.Create(e.Message);
   end;
   inherited;
-
 end;
 
 end.

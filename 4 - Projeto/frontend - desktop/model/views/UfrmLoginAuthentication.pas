@@ -42,7 +42,7 @@ implementation
 
 uses
   UfrmLogin,
-//  UfrmHome,
+  UfrmHome,
   UEntity.Logins,
   UService.Intf,
   UService.Login,
@@ -53,14 +53,12 @@ uses
 
 procedure TFrmLoginAuthentication.AbrirHome;
 begin
-  showmessage('login realizado');
-end;
-  {if not Assigned(FrmHome) then
+  if not Assigned(FrmHome) then
     FrmHome := TFrmHome.Create(Application);
 
   FrmHome.Show;
   Application.MainForm := FrmHome;
-end; }
+end;
 
 procedure TFrmLoginAuthentication.FormClose(Sender: TObject;
   var Action: TCloseAction);

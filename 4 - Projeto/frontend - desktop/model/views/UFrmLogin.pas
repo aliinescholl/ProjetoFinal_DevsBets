@@ -50,6 +50,7 @@ begin
 
   FrmLoginAuthentication.Show;
   Application.MainForm := FrmLoginAuthentication;
+  Self.Close;
 end;
 
 procedure TFrmLogin.AbrirLoginRegistry;
@@ -59,6 +60,7 @@ begin
 
   FrmLoginRegistry.Show;
   Application.MainForm := FrmLoginRegistry;
+  Self.Close;
 end;
 
 procedure TFrmLogin.lblSairClick(Sender: TObject);
