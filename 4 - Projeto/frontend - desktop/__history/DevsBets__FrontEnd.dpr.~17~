@@ -21,12 +21,7 @@ uses
   UfrmLoginAuthentication in 'model\views\UfrmLoginAuthentication.pas' {FrmLoginAuthentication},
   UUtils.Enums in 'model\utils\UUtils.Enums.pas',
   UService.Team in 'model\services\UService.Team.pas',
-  UService.Match in 'model\services\UService.Match.pas',
-  UService.Bet in 'model\services\UService.Bet.pas',
-  Utils.Functions in 'model\utils\Utils.Functions.pas',
-  UfraTeams in 'model\views\UfraTeams.pas' {FraTeam: TFrame},
-  UfraMatchs in 'model\views\UfraMatchs.pas' {FraBet: TFrame},
-  UFraBet.registry in 'model\views\UFraBet.registry.pas' {Frame1: TFrame};
+  UService.Match in 'model\services\UService.Match.pas';
 
 {$R *.res}
 

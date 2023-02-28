@@ -294,7 +294,26 @@
             <Form>FrmLoginAuthentication</Form>
             <FormType>fmx</FormType>
         </DCCReference>
-        <DCCReference Include="model\utils\UTils.Enums.pas"/>
+        <DCCReference Include="model\utils\UUtils.Enums.pas"/>
+        <DCCReference Include="model\services\UService.Team.pas"/>
+        <DCCReference Include="model\services\UService.Match.pas"/>
+        <DCCReference Include="model\services\UService.Bet.pas"/>
+        <DCCReference Include="model\utils\Utils.Functions.pas"/>
+        <DCCReference Include="model\views\UfraTeams.pas">
+            <Form>FraTeam</Form>
+            <FormType>fmx</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="model\views\UfraMatchs.pas">
+            <Form>FraBet</Form>
+            <FormType>fmx</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="model\views\UFraBet.registry.pas">
+            <Form>Frame1</Form>
+            <FormType>fmx</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
